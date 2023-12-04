@@ -1,38 +1,25 @@
-import 'package:dio/dio.dart';
-import 'package:equatable/equatable.dart';
+import 'package:newyork_times/core/api_service.dart';
+import 'package:newyork_times/newyork_times/data/models/most_popular_model/most_popular_model.dart';
 
 import '../../../core/api_endpoints.dart';
-import '../../../core/errors/ErrorMessagModel.dart';
-import '../../../core/errors/exceptions.dart';
-import '../models/most_popular_model/MostPopularModel.dart';
+
 abstract class BaseMostpopularRemoteDataSource {
-
-
-  Future<MostPopularModel> getMostPopularData( );
-
+  Future<MostPopularModel> getMostPopularData();
 }
-class MostpopularRemoteDataSource extends BaseMostpopularRemoteDataSource {
 
-//--header 'Accept: application/json'
+class MostpopularRemoteDataSource extends BaseMostpopularRemoteDataSource {
+  final ApiService apiService;
+
+  MostpopularRemoteDataSource(this.apiService);
 
   @override
   Future<MostPopularModel> getMostPopularData() async {
-       final response = await Dio().get(ApiConst.MOST_POPULAR_VIEWED);
+    MostPopularModel mostPopularModel;
 
-       if (response.statusCode == 200) {
-         return MostPopularModel.fromJson(response.data);
-       }
-       else {
-         print(response.data);
-         throw ServerException(
-           errorMessageModel: ErrorMessagModel.fromJson(response.data),
-         );
-       }
-     }
+    var response = await apiService.get(endPoint: ApiConst.MOST_POPULAR_VIEWED);
 
+    mostPopularModel = MostPopularModel.fromJson(response);
 
-
-
-
+    return mostPopularModel;
   }
-
+}

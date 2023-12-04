@@ -1,5 +1,5 @@
-# newyork_times
-this screens is developed using clean acri with its 3 layers
+# New York Times
+this screens is developed using clean acri with its 3 layers 
 1-presentation:controller(Bloc),screens,widget
 2-data:data source,models,repositories
 3-domain:entities,base repositories,usecases

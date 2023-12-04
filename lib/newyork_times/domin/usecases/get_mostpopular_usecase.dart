@@ -1,18 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:newyork_times/core/errors/failure.dart';
+import 'package:newyork_times/newyork_times/data/models/most_popular_model/most_popular_model.dart';
+import 'package:newyork_times/newyork_times/domin/repository/most_popular_base_reopsitory.dart';
 
-//import 'package:newyork_times/core/errors/failure.dart';
-
-import '../../../core/errors/failure.dart';
-import '../entities/most_popular_entity.dart';
-import '../repository/most_popular_basereopsitory.dart';
-
-class GetPopularUsecase  {
+class GetPopularUsecase {
   final BaseMostPopularRepository baseMostPopularRepository;
 
   GetPopularUsecase(this.baseMostPopularRepository);
 
-
-  Future<Either<Failure, MostPopular>> excute() async {
+  Future<Either<Failure, MostPopularModel>> excute() async {
     return await baseMostPopularRepository.getMostPopular();
   }
 }
+
